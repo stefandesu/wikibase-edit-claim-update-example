@@ -1,5 +1,5 @@
 // Adjust config.json with OAuth credentials
-const wdEdit = require("wikidata-edit")(require("./config.json"))
+const wdEdit = require("wikibase-edit")(require("./config.json"))
 
 // Adjust entity for testing if necessary (default is Wikidata Sandbox)
 const entity = "Q4115189"
@@ -18,7 +18,11 @@ async function runTest() {
   // 1. Create claim on entity
   let guid
   try {
-    const addClaimResult = await wdEdit.claim.add(entity, claimProperty, claimValueCreate)
+    const addClaimResult = await wdEdit.claim.create({
+      id: entity,
+      property: claimProperty,
+      value: claimValueCreate
+    })
     guid = addClaimResult && addClaimResult.claim.id
   } catch(error) {
     console.error(error)
@@ -37,7 +41,7 @@ async function runTest() {
 
   // 2. Update claim that was just created
   try {
-    const updateClaimResult = await wdEdit.claim.update(guid, claimValueUpdate)
+    const updateClaimResult = await wdEdit.claim.update({ guid, newValue: claimValueUpdate })
     if (!updateClaimResult.success) {
       throw new Error("Updating claim was apparently not successful.")
     }
@@ -53,7 +57,7 @@ async function runTest() {
 
   // 3. Delete claim again
   try {
-    await wdEdit.claim.remove(guid)
+    await wdEdit.claim.remove({ guid })
     console.log("- Deleting claim was successful.")
   } catch(error) {
     console.error(error)
