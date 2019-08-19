@@ -1,0 +1,14 @@
+{
+  "name": "wikibase-edit-claim-update-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stefan Peters <stefandesu@exo.pm> (https://exo.pm)",
+  "license": "ISC",
+  "dependencies": {
+    "wikidata-edit": "^2.9.3"
+  }
+}
