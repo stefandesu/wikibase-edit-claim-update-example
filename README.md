@@ -1,3 +1,6 @@
+**Note: The error was fixed in wikibase-edit v3, but there is still a bug with OAuth that's waiting to be fixed: https://github.com/maxlath/wikibase-edit/pull/39**
+
+
 This is a test repository to demonstrate the bug in [wikibase-edit](https://github.com/maxlath/wikibase-edit) (or potentially Wikibase itself) that is described here: https://github.com/maxlath/wikibase-edit/issues/34
 
 Apparently, if you use OAuth authentication, only `claim.update` fails to authenticate while other actions work. This repository demostrates that behavior by creating a claim, trying to update it, and deleting it again. You'll see that creating and deleting works, but updating does not.
@@ -11,14 +14,17 @@ cd wikibase-edit-claim-update-example
 npm i
 ```
 
-Then, create a `config.json` file with your OAuth credentials like this:
+Then, create a `config.json` file with your OAuth credentials and instance like this:
 ```json
 {
-  "oauth": {
-    "token": "...",
-    "token_secret": "...",
-    "consumer_key": "...",
-    "consumer_secret": "..."
+  "instance": "https://www.wikidata.org",
+  "credentials" :{
+    "oauth": {
+      "token": "...",
+      "token_secret": "...",
+      "consumer_key": "...",
+      "consumer_secret": "..."
+    }
   }
 }
 ```
